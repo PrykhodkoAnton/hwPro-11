@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<button>1</button>
+<button>2</button>
+<div class="hw11-2" style="margin: 50px 0px">
+    <button>кнопка 1</button>
+    <button>кнопка 2</button>
+    <button>кнопка 3</button>
+</div>
+<div class="hw11-3">
+    <input type="text" placeholder="додати нове завдання" value="">
+    <button>додати</button>
+</div>
+</body>
+<script>
+    const button1 = document.querySelectorAll("button")[0];
+    const button2 = document.querySelectorAll("button")[1];
+    let buttonLink;
+    button1.addEventListener('click', () => {
+        let userInputLink = prompt('insert a link to the site');
+        if (userInputLink !== null){
+            if (userInputLink !== ''){
+                button2.innerText = '';
+                buttonLink = document.createElement('a');
+                button2.appendChild(buttonLink);
+                buttonLink.href = userInputLink;
+                buttonLink.innerText = '2';
+            }
+            else {
+                alert("вы не ввели данные");
+            }
+        }else {
+            alert("вы отменили ввод");
+        }
+    })
+    document.querySelector('.hw11-2').addEventListener('click', (event) => {
+        if (event.target.tagName === 'BUTTON'){
+            alert(`ви нажали кнопку : ${event.target.innerText}`);
+        }
+    })
+    const container = document.querySelector('.hw11-3');
+    const getTask = container.querySelector("button");
+    const containerTasks = document.createElement('ul');
+    container.appendChild(containerTasks);
+
+    getTask.addEventListener('click',() => {
+        const userInput = container.querySelector('input').value;
+        if (userInput !== ""){
+            const containerTask = document.createElement('li');
+            containerTasks.appendChild(containerTask);
+            containerTask.innerHTML = userInput + "<button>видалити</button>";
+
+            const buttonDell = containerTask.querySelector('button');
+            buttonDell.addEventListener('click',() => {
+                containerTask.remove();
+            })
+        }else {
+            alert("ви не ввели задачу");
+        }
+
+    })
+</script>
+</html>
